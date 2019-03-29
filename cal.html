@@ -1,0 +1,84 @@
+<!Doctype html>
+<html>
+
+<head>
+	<title>
+	Calculator
+	</title>
+	<script type="text/javascript">
+		var b=document.getElementById('box');
+		function box_value(var op)
+		{
+			b.value=op;
+		}
+		function check_op()
+		{
+			switch(op)
+			{
+				case '+':sum();
+					break;
+				case '-':diff();
+					break;
+				case '*':pro();
+					break;
+				case '/':quo();
+					break;
+				case '%':rem();
+					break;
+			}
+
+		}
+		function sum()
+		{
+
+		}
+		function diff()
+		{
+
+		}
+		function pro()
+		{
+
+		}
+		function quo()
+		{
+
+		}
+		function rem()
+		{
+
+		}
+		function evaluate()
+		{
+
+		}
+	</script>
+</head>
+<body>
+<form>
+<input type="text" id="box"/><br/>
+<input type="button" value="1" id="1" onclick="box_value(1);"/>
+<input type="button" value="2" id="2" onclick="box_value(2);"/>
+<input type="button" value="3" id="3" onclick="box_value(3);"/>
+<br/>
+<input type="button" value="4" id="4" onclick="box_value(4);"/>
+<input type="button" value="5" id="5" onclick="box_value(5);"/>
+<input type="button" value="6" id="6" onclick="box_value(6);"/>
+<br/>
+<input type="button" value="7" id="7" onclick="box_value(7);"/>
+<input type="button" value="8" id="8" onclick="box_value(8);"/>
+<input type="button" value="9" id="9" onclick="box_value(9);"/>
+<br/>
+<input type="button" value="0" id="0" onclick="box_value(0);"/>
+<br/>
+<input type="button" value="+" id="+" onclick="box_value(+);"/>
+<input type="button" value="-" id="-" onclick="box_value(-);"/>
+<input type="button" value="*" id="*" onclick="box_value(*);"/>
+<input type="button" value="/" id="/" onclick="box_value(/);"/>
+<input type="button" value="%" id="%" onclick="box_value(%);"/>
+<br/>
+<input type="submit" onclick="evaluate();"/>
+<form/>
+</body>
+
+</html>
