@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			TIC-TAK-TOE
+		</title>
+		<script type="text/javascript">
+			var sym = 'Cross';
+			var flag = 0;
+			var tag=0;
+			function change(id)
+			{
+				//tag++;
+				var Box = document.getElementById(id);
+				if(Box.value==' ')
+				{
+					tag++;
+				}
+				if(sym == 'Cross' && Box.value == ' ')
+				{
+					Box.value = 'X';
+					sym = 'Zero';
+				}
+				else if(sym == 'Zero' && Box.value == ' ')
+				{
+					Box.value = 'O';
+					sym = 'Cross';
+				}
+				if(tag < 9)
+				{
+					winner_check();
+				}
+				else
+				{
+					winner_check();
+					if(flag == 0)
+					{
+						setTimeout('alert("Brooooo. Draw hogaya bro.");', 1);
+						setTimeout('location.reload();', 1);
+					}
+				}				
+			}
+			function winner_check()
+			{
+				horizontally();
+				vertically();
+				diagonally_one();
+				diagonally_two();
+			}
+			function horizontally()
+			{
+				for(var x=1;x<=7;x=x+3)
+				{
+					var b1 = document.getElementById(x);
+					var b2 = document.getElementById(x+1);
+					var b3 = document.getElementById(x+2);
+					if(b1.value == b2.value && b1.value == b3.value && b1.value != ' ')
+						winner_declaration();
+				}
+			}
+			function vertically()
+			{
+				for(var x=1;x<=3;x++)
+				{
+					var b1 = document.getElementById(x);
+					var b2 = document.getElementById(x+3);
+					var b3 = document.getElementById(x+6);
+					if(b1.value == b2.value && b1.value == b3.value && b1.value != ' ')
+						winner_declaration();
+				}
+			}
+			function diagonally_one()
+			{
+				var b1 = document.getElementById(1);
+				var b2 = document.getElementById(5);
+				var b3 = document.getElementById(9);
+				if(b1.value == b2.value && b1.value == b3.value && b1.value != ' ')
+					winner_declaration();
+			}
+			function diagonally_two()
+			{
+				var b1 = document.getElementById(3);
+				var b2 = document.getElementById(5);
+				var b3 = document.getElementById(7);
+				if(b1.value == b2.value && b1.value == b3.value && b1.value != ' ')
+					winner_declaration();
+			}
+			//function sleep(ms)
+			//{
+			//	return new Promise(resolve => setTimeout(resolve, ms));
+			//}
+			//async function winner_declaration()  //To use await sleep(), uncomment this function and call to this function  
+			function winner_declaration()  //
+			{
+				//await sleep(500);
+				if(sym == 'Cross')
+				{
+					setTimeout('alert("Ooooo...Badhaiyan Ji Badhaiyan. Jero jeet gaya.");', 1);
+					flag = 1;
+					//setTimeout('alert("Congratulations. Zero Won!!!");', 1);
+				}
+				else
+				{
+					setTimeout('alert("Ooooohhh....Shit Yaar. Jero haar gaya.")', 1);
+					flag = 1;
+					//setTimeout('alert("Congratulations. Cross Won!!!");', 1);
+				}
+				setTimeout('location.reload();', 2);				
+			}
+		</script>
+	</head>
+	<body>
+	<form>
+		<input type="button" value=" " id="1" onclick="change(1);"/>
+		<input type="button" value=" " id="2" onclick="change(2);"/>
+		<input type="button" value=" " id="3" onclick="change(3);"/>
+		<br/>
+		<input type="button" value=" " id="4" onclick="change(4);"/>
+		<input type="button" value=" " id="5" onclick="change(5);"/>
+		<input type="button" value=" " id="6" onclick="change(6);"/>
+		<br/>
+		<input type="button" value=" " id="7" onclick="change(7);"/>
+		<input type="button" value=" " id="8" onclick="change(8);"/>
+		<input type="button" value=" " id="9" onclick="change(9);"/>
+	</form>
+	</body>
+</html>
