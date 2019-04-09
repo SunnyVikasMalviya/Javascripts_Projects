@@ -1,62 +1,90 @@
 <!Doctype html>
-<html>
-
+<html lang="en"> 
 <head>
+	<meta charset="utf-8">
 	<title>
 	Calculator
 	</title>
 	<script type="text/javascript">
-		var b=document.getElementById('box');
-		function box_value(var op)
+		var x=null;
+		var y=null;
+		var sum_x=0,sum_y=0;
+		var op1=null;
+		function reset_xyop1()
 		{
-			b.value=op;
+			x=null;
+			y=null;
+			op1=null;
+			sum_x=0;
+			sum_y=0;
+			op=null;
+			var b = document.getElementById('box');
+			b.value=0;
 		}
-		function check_op()
+		function box_value(input)
 		{
-			switch(op)
+			var b = document.getElementById('box');
+			if(op1==null)
+			{	
+				sum_x = 10 * sum_x + input;
+				b.value=sum_x;
+				x=sum_x;
+			}
+			if(op1!=null)
 			{
-				case '+':sum();
+				sum_y = 10 * sum_y + input;
+				b.value=sum_y;
+				y=sum_y;
+			}
+		}
+		function check_op(op)
+		{
+			if(x == null)
+			{
+				alert("Enter a number before an operator.");
+				return 0;
+			}
+			var b = document.getElementById('box');
+			b.value=op;
+			op1=op;
+		}
+		function solve()
+		{
+			if(x == null && y == null && op1 == null)
+			{
+				alert("Bro...Kuch to dal.");
+				return(0);
+			}
+			else if(x == null && y == null)
+			{
+				alert("Bro...number bhi dalni hoti hai.");
+				return(0);
+			}
+			else if(y == null)
+			{
+				alert("Enter a number before computing.")
+				return(0);
+			}
+			var b = document.getElementById('box');
+			switch(op1)
+			{
+				case '+':b.value=x+y;
 					break;
-				case '-':diff();
+				case '-':b.value=x-y;
 					break;
-				case '*':pro();
+				case '*':b.value=x*y;
 					break;
-				case '/':quo();
+				case '/':b.value=x/y;
 					break;
-				case '%':rem();
+				case '%':b.value=x%y;
 					break;
 			}
-
-		}
-		function sum()
-		{
-
-		}
-		function diff()
-		{
-
-		}
-		function pro()
-		{
-
-		}
-		function quo()
-		{
-
-		}
-		function rem()
-		{
-
-		}
-		function evaluate()
-		{
-
 		}
 	</script>
 </head>
 <body>
 <form>
-<input type="text" id="box"/><br/>
+<input type="text" id="box" value="0"/><br/>
 <input type="button" value="1" id="1" onclick="box_value(1);"/>
 <input type="button" value="2" id="2" onclick="box_value(2);"/>
 <input type="button" value="3" id="3" onclick="box_value(3);"/>
@@ -70,15 +98,16 @@
 <input type="button" value="9" id="9" onclick="box_value(9);"/>
 <br/>
 <input type="button" value="0" id="0" onclick="box_value(0);"/>
+<input type="button" value="." id="." onclick="box_value('.');"/>
 <br/>
-<input type="button" value="+" id="+" onclick="box_value(+);"/>
-<input type="button" value="-" id="-" onclick="box_value(-);"/>
-<input type="button" value="*" id="*" onclick="box_value(*);"/>
-<input type="button" value="/" id="/" onclick="box_value(/);"/>
-<input type="button" value="%" id="%" onclick="box_value(%);"/>
+<input type="button" value="+" id="+" onclick="check_op('+');"/>
+<input type="button" value="-" id="-" onclick="check_op('-');"/>
+<input type="button" value="*" id="*" onclick="check_op('*');"/>
+<input type="button" value="/" id="/" onclick="check_op('/');"/>
+<input type="button" value="%" id="%" onclick="check_op('%');"/>
 <br/>
-<input type="submit" onclick="evaluate();"/>
+<input type="button" value="C" id="C" onclick="reset_xyop1();"/>
+<input type="button" value="=" id="=" onclick="solve();"/>
 <form/>
 </body>
-
 </html>
