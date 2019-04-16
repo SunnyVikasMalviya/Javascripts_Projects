@@ -10,6 +10,9 @@
 		var y=null;
 		var sum_x=0,sum_y=0;
 		var op1=null;
+		var dec_tag = 0;
+		var dec_part;
+		var dec_place;
 		function reset_xyop1()
 		{
 			x=null;
@@ -18,23 +21,58 @@
 			sum_x=0;
 			sum_y=0;
 			op=null;
+			dec_part=null;
 			var b = document.getElementById('box');
 			b.value=0;
+			dec_place = 1;
 		}
 		function box_value(input)
 		{
 			var b = document.getElementById('box');
-			if(op1==null)
-			{	
-				sum_x = 10 * sum_x + input;
-				b.value=sum_x;
-				x=sum_x;
-			}
-			if(op1!=null)
+			if(input == '.')
 			{
-				sum_y = 10 * sum_y + input;
-				b.value=sum_y;
-				y=sum_y;
+				//dec_tag = 1;
+				/*
+				I still have to add some code to make the decimal point appear in the answers.
+				Try changing dec_tag with the decimal point for both x and y.
+				
+				*/
+				dec_place = 1;
+				dec_part=0;
+			}
+			else if(op1==null)
+			{	
+				if(dec_tag == 0)
+				{
+					sum_x = 10 * sum_x + input;
+					b.value=sum_x;
+					x=sum_x;
+				}
+				else
+				{
+					dec_place = dec_place / 10;
+					dec_part = input * dec_place;
+					sum_x = sum_x + dec_part;
+					b.value=sum_x;
+					x=sum_x;					
+				}
+			}	
+			else if(op1!=null)
+			{
+				if(dec_tag == 0)
+				{
+					sum_y = 10 * sum_y + input;
+					b.value=sum_y;
+					y=sum_y;
+				}
+				else 
+				{
+					dec_place = dec_place / 10;
+					dec_part = input * dec_place;
+					sum_y = sum_y + dec_part;
+					b.value=sum_y;
+					x=sum_y;
+				}
 			}
 		}
 		function check_op(op)
