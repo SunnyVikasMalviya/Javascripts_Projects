@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title>
-			TIC-TAK-TOE
+			TIMED-TIC-TAK-TOE
 		</title>
 		<script type="text/javascript">
-			var sym = 'Cross';
-			var flag = 0;
-			var tag=0;
+			var sym = 'Cross';     	//sym swaps between cross and zero to know whose chance it is.
+			var flag = 0;			//
+			var tag = 0;			//Counts the number of boxes that have any symbol in them.
+			var inc = 0;			//Keeps on incrementing, used to check whether players are making a move or not within alloted time.
 			function change(id)
 			{
 				//tag++;
@@ -16,16 +17,23 @@
 				if(Box.value==' ')
 				{
 					tag++;
+					inc++;
 				}
 				if(sym == 'Cross' && Box.value == ' ')
 				{
 					Box.value = 'X';
 					sym = 'Zero';
+					var n = inc;
+					setTimeout(function(){if(sym=='Zero' && inc==n){sym='Zero';winner_declaration(1);}}, 4000);
+					setTimeout(function(){Box.value = ' '; tag--;}, 10000);
 				}
 				else if(sym == 'Zero' && Box.value == ' ')
 				{
 					Box.value = 'O';
 					sym = 'Cross';
+					var n = inc;
+					setTimeout(function(){if(sym=='Cross' && inc==n){sym='Cross';winner_declaration(1);}}, 4000);
+					setTimeout(function(){Box.value = ' '; tag--;}, 10000);
 				}
 				if(tag < 9)
 				{
@@ -91,18 +99,20 @@
 			//	return new Promise(resolve => setTimeout(resolve, ms));
 			//}
 			//async function winner_declaration()  //To use await sleep(), uncomment this function and call to this function  
-			function winner_declaration()  //
+			function winner_declaration(to)  //
 			{
 				//await sleep(500);
 				if(sym == 'Cross')
 				{
 					setTimeout('alert("Ooooo...Badhaiyan Ji Badhaiyan. Jero jeet gaya.");', 1);
+					setTimeout(function(){if(to == 1){alert("Apna Jero TimeOut ki wajah se jeeta hai.");}}, 2);
 					flag = 1;
 					//setTimeout('alert("Congratulations. Zero Won!!!");', 1);
 				}
 				else
 				{
 					setTimeout('alert("Ooooohhh....Shit Yaar. Jero haar gaya.")', 1);
+					setTimeout(function(){if(to == 1){alert("Jero ka TimeOut hogaya tha na.");}}, 2);
 					flag = 1;
 					//setTimeout('alert("Congratulations. Cross Won!!!");', 1);
 				}
@@ -112,17 +122,23 @@
 	</head>
 	<body>
 	<form>
-		<input type="button" value=" " id="1" onclick="change(1);"/>
-		<input type="button" value=" " id="2" onclick="change(2);"/>
-		<input type="button" value=" " id="3" onclick="change(3);"/>
+		<input type="button" style="width:40px;" value=" " id="1" onclick="change(1);"/>
+		<input type="button" style="width:40px;" value=" " id="2" onclick="change(2);"/>
+		<input type="button" style="width:40px;" value=" " id="3" onclick="change(3);"/>
 		<br/>
-		<input type="button" value=" " id="4" onclick="change(4);"/>
-		<input type="button" value=" " id="5" onclick="change(5);"/>
-		<input type="button" value=" " id="6" onclick="change(6);"/>
+		<input type="button" style="width:40px;" value=" " id="4" onclick="change(4);"/>
+		<input type="button" style="width:40px;" value=" " id="5" onclick="change(5);"/>
+		<input type="button" style="width:40px;" value=" " id="6" onclick="change(6);"/>
 		<br/>
-		<input type="button" value=" " id="7" onclick="change(7);"/>
-		<input type="button" value=" " id="8" onclick="change(8);"/>
-		<input type="button" value=" " id="9" onclick="change(9);"/>
+		<input type="button" style="width:40px;" value=" " id="7" onclick="change(7);"/>
+		<input type="button" style="width:40px;" value=" " id="8" onclick="change(8);"/>
+		<input type="button" style="width:40px;" value=" " id="9" onclick="change(9);"/>
 	</form>
+	<p>
+	<h3>Timed Tik-Tak-Toe Rules</h3>
+	1. Both players will get 4 seconds to make each of their moves; violation of this time limit will lead to loss.<br/>
+	2. After every 10 seconds of a move in a box, the symbol in the box will disappear, making the box available for a new move.<br/>
+	3. The game ends only either with a players victory or with timeout of a player.
+	</p>
 	</body>
 </html>
